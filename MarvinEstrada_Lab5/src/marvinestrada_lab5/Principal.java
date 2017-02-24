@@ -20,6 +20,10 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         bg_lugar = new javax.swing.ButtonGroup();
+        popup = new javax.swing.JPopupMenu();
+        eliminar_restaurante = new javax.swing.JMenuItem();
+        eliminar_canchas = new javax.swing.JMenuItem();
+        eliminar_carretera = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         tb_control = new javax.swing.JTabbedPane();
@@ -91,12 +95,37 @@ public class Principal extends javax.swing.JFrame {
         jtb_listar = new javax.swing.JTable();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jt_categorias_restaurante = new javax.swing.JTree();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jl_listar = new javax.swing.JList<>();
+
+        eliminar_restaurante.setText("Eliminar Restaurante");
+        eliminar_restaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_restauranteActionPerformed(evt);
+            }
+        });
+        popup.add(eliminar_restaurante);
+
+        eliminar_canchas.setText("Eliminar Cancha");
+        eliminar_canchas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_canchasActionPerformed(evt);
+            }
+        });
+        popup.add(eliminar_canchas);
+
+        eliminar_carretera.setText("Eliminar Carretera");
+        eliminar_carretera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_carreteraActionPerformed(evt);
+            }
+        });
+        popup.add(eliminar_carretera);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -492,6 +521,11 @@ public class Principal extends javax.swing.JFrame {
                 jButton4MouseClicked(evt);
             }
         });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -570,6 +604,11 @@ public class Principal extends javax.swing.JFrame {
                 "", "", "", ""
             }
         ));
+        jtb_listar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtb_listarMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jtb_listar);
 
         bg_lugar.add(jRadioButton1);
@@ -589,6 +628,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        bg_lugar.add(jRadioButton3);
+        jRadioButton3.setText("Carreteras");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -599,7 +646,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jRadioButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(jRadioButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton3))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
@@ -609,7 +658,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115))
@@ -725,11 +775,12 @@ public class Principal extends javax.swing.JFrame {
             lista_restaurantes.add(new Restaurantes(categoria, calificacion, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
             JOptionPane.showMessageDialog(this, "El restaurante ha sido creado exitosamente");
 
-            /*if (Double.parseDouble(tf_distancia.getText()) <= 50){
+            if (Double.parseDouble(tf_distancia.getText()) <= 50){
                 DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
                 modelo.addElement(new Lugar(tf_nombre_restaurante.getText(), ta_direccion_restaurante.getText(), (Integer) sp_nivel_restaurante.getValue(),
                         new Carretera(), new Carretera()));
-            }*/
+            }
+            
             tf_nombre_restaurante.setText("");
             ta_direccion_restaurante.setText("");
             sp_nivel_restaurante.setValue(0);
@@ -765,11 +816,12 @@ public class Principal extends javax.swing.JFrame {
             lista_canchas.add(new Canchas(categoria, estado, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
             JOptionPane.showMessageDialog(this, "La cancha ha sido creada exitosamente");
 
-            /*if (Double.parseDouble(tf_distancia.getText()) <= 50){
+            if (Double.parseDouble(tf_distancia.getText()) <= 50){
                 DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
                 modelo.addElement(new Lugar(tf_nombre_cancha.getText(), ta_direccion_cancha.getText(), (Integer) sp_nivel_cancha.getValue(),
                         new Carretera(), new Carretera()));
-            }*/
+            }
+            
             tf_nombre_cancha.setText("");
             ta_direccion_cancha.setText("");
             sp_nivel_cancha.setValue(0);
@@ -876,6 +928,61 @@ public class Principal extends javax.swing.JFrame {
             cb_final.setModel(modelo);
         }
     }//GEN-LAST:event_tb_controlStateChanged
+
+    private void jtb_listarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_listarMouseClicked
+        if (evt.isMetaDown()){
+            popup.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jtb_listarMouseClicked
+
+    private void eliminar_restauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_restauranteActionPerformed
+        if (jtb_listar.getSelectedRow() >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+            lista_restaurantes.remove(jtb_listar.getSelectedRow());
+            modelo.removeRow(jtb_listar.getSelectedRow());
+
+            jtb_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_eliminar_restauranteActionPerformed
+
+    private void eliminar_canchasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_canchasActionPerformed
+        if (jtb_listar.getSelectedRow() >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+            lista_canchas.remove(jtb_listar.getSelectedRow());
+            modelo.removeRow(jtb_listar.getSelectedRow());
+
+            jtb_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_eliminar_canchasActionPerformed
+
+    private void eliminar_carreteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_carreteraActionPerformed
+        if (jtb_listar.getSelectedRow() >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+            lista_carreteras.remove(jtb_listar.getSelectedRow());
+            modelo.removeRow(jtb_listar.getSelectedRow());
+
+            jtb_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_eliminar_carreteraActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+        Object[] newrow = {Integer.parseInt(tf_numero.getText()), Double.parseDouble(tf_distancia.getText())};
+        modelo.addRow(newrow);
+        jtb_listar.setModel(modelo);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        jtb_listar.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},
+                new String[]{"Número", "Distancia"}));
+        DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+
+        for (int i = 0; i < lista_carreteras.size(); i++) {
+            Object[] row = {lista_carreteras.get(i).getNumero(), lista_carreteras.get(i).getDistancia()};
+            modelo.addRow(row);
+        }
+        jtb_listar.setModel(modelo);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -919,6 +1026,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_salida_cancha;
     private javax.swing.JComboBox<String> cb_salida_casa;
     private javax.swing.JComboBox<String> cb_salida_restaurante;
+    private javax.swing.JMenuItem eliminar_canchas;
+    private javax.swing.JMenuItem eliminar_carretera;
+    private javax.swing.JMenuItem eliminar_restaurante;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -960,6 +1070,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -972,6 +1083,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_listar;
     private javax.swing.JTree jt_categorias_restaurante;
     private javax.swing.JTable jtb_listar;
+    private javax.swing.JPopupMenu popup;
     private javax.swing.JSpinner sp_nivel_cancha;
     private javax.swing.JSpinner sp_nivel_casa;
     private javax.swing.JSpinner sp_nivel_restaurante;

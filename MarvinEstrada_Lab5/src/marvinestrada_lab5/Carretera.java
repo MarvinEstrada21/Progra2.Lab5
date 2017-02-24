@@ -15,6 +15,22 @@ public class Carretera {
         this.finale = finale;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
+    }
+
     public Lugar getInicio() {
         return inicio;
     }
