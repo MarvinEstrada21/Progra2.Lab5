@@ -33,6 +33,6 @@ public class Carretera {
 
     @Override
     public String toString() {
-        return "Carretera{" + "numero=" + numero + ", distancia=" + distancia + ", inicio=" + inicio + ", finale=" + finale + '}';
+        return numero + "";
     }
 }

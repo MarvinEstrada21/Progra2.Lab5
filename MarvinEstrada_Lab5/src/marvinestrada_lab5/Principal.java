@@ -1,6 +1,7 @@
 package marvinestrada_lab5;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -21,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
         bg_lugar = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tb_control = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -92,12 +93,18 @@ public class Principal extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jt_categorias = new javax.swing.JTree();
+        jt_categorias_restaurante = new javax.swing.JTree();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jl_listar = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tb_control.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tb_controlStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -368,6 +375,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(ta_direccion_casa);
 
         jButton3.setText("Agregar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -464,7 +476,7 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jTabbedPane3)
         );
 
-        jTabbedPane2.addTab("Lugar", jPanel3);
+        tb_control.addTab("Lugar", jPanel3);
 
         jLabel22.setText("Número:");
 
@@ -475,6 +487,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel25.setText("Lugar Final:");
 
         jButton4.setText("Agregar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -529,17 +546,17 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Carretera", jPanel4);
+        tb_control.addTab("Carretera", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tb_control)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tb_control)
         );
 
         jTabbedPane1.addTab("Creación", jPanel1);
@@ -550,12 +567,13 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Dirección", "Nivel", "Categoría"
+                "", "", "", ""
             }
         ));
         jScrollPane4.setViewportView(jtb_listar);
 
         bg_lugar.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Restaurantes");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -565,6 +583,11 @@ public class Principal extends javax.swing.JFrame {
 
         bg_lugar.add(jRadioButton2);
         jRadioButton2.setText("Canchas");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -595,24 +618,24 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane4.addTab("Tabla", jPanel10);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorías");
-        jt_categorias.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane5.setViewportView(jt_categorias);
+        jt_categorias_restaurante.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane5.setViewportView(jt_categorias_restaurante);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(194, 194, 194)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(73, 73, 73)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Arbol", jPanel11);
@@ -676,7 +699,7 @@ public class Principal extends javax.swing.JFrame {
         jtb_listar.setModel(modelo);
 
         //Agregar a Árbol
-        DefaultTreeModel m = (DefaultTreeModel) jt_categorias.getModel();
+        DefaultTreeModel m = (DefaultTreeModel) jt_categorias_restaurante.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
         DefaultMutableTreeNode tipo_categoria;
         tipo_categoria = new DefaultMutableTreeNode("Restaurantes");
@@ -699,15 +722,14 @@ public class Principal extends javax.swing.JFrame {
             nivel_seguridad = (Integer) sp_nivel_restaurante.getValue();
             categoria = cb_categoria_restaurante.getSelectedItem().toString();
             calificacion = Integer.parseInt(tf_calificacion.getText());
-            lista_lugares.add(new Restaurantes(categoria, calificacion, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
+            lista_restaurantes.add(new Restaurantes(categoria, calificacion, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
             JOptionPane.showMessageDialog(this, "El restaurante ha sido creado exitosamente");
-            
-            if (Double.parseDouble(tf_distancia.getText()) <= 50){
+
+            /*if (Double.parseDouble(tf_distancia.getText()) <= 50){
                 DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
                 modelo.addElement(new Lugar(tf_nombre_restaurante.getText(), ta_direccion_restaurante.getText(), (Integer) sp_nivel_restaurante.getValue(),
                         new Carretera(), new Carretera()));
-            }
-
+            }*/
             tf_nombre_restaurante.setText("");
             ta_direccion_restaurante.setText("");
             sp_nivel_restaurante.setValue(0);
@@ -719,7 +741,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        
+        jtb_listar.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},
+                new String[]{"Nombre", "Direccion", "Nivel de seguridad", "Categoria"}));
+        DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+
+        for (int i = 0; i < lista_restaurantes.size(); i++) {
+            Object[] row = {lista_restaurantes.get(i).getNombre(), lista_restaurantes.get(i).getDireccion(),
+                lista_restaurantes.get(i).getNivel_seguridad(), lista_restaurantes.get(i).getCategoria(),};
+            modelo.addRow(row);
+        }
+        jtb_listar.setModel(modelo);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -731,10 +762,56 @@ public class Principal extends javax.swing.JFrame {
             nivel_seguridad = (Integer) sp_nivel_cancha.getValue();
             categoria = cb_categoria_cancha.getSelectedItem().toString();
             estado = cb_estado.getSelectedItem().toString();
-            lista_lugares.add(new Canchas(categoria, estado, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
+            lista_canchas.add(new Canchas(categoria, estado, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
             JOptionPane.showMessageDialog(this, "La cancha ha sido creada exitosamente");
-            
-            if (Double.parseDouble(tf_distancia.getText()) <= 50){
+
+            /*if (Double.parseDouble(tf_distancia.getText()) <= 50){
+                DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
+                modelo.addElement(new Lugar(tf_nombre_cancha.getText(), ta_direccion_cancha.getText(), (Integer) sp_nivel_cancha.getValue(),
+                        new Carretera(), new Carretera()));
+            }*/
+            tf_nombre_cancha.setText("");
+            ta_direccion_cancha.setText("");
+            sp_nivel_cancha.setValue(0);
+            cb_categoria_cancha.setSelectedIndex(0);
+            cb_estado.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se guardaron los datos");
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+        Object[] newrow = {tf_nombre_cancha.getText(), ta_direccion_cancha.getText(), sp_nivel_cancha.getValue(),
+            cb_categoria_cancha.getSelectedItem()};
+        modelo.addRow(newrow);
+        jtb_listar.setModel(modelo);
+
+        DefaultTreeModel m = (DefaultTreeModel) jt_categorias_restaurante.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode tipo_categoria;
+        tipo_categoria = new DefaultMutableTreeNode("Canchas");
+        DefaultMutableTreeNode nodo;
+        nodo = new DefaultMutableTreeNode(cb_categoria_cancha.getSelectedItem().toString());
+        DefaultMutableTreeNode nombre_can;
+        nombre_can = new DefaultMutableTreeNode(tf_nombre_cancha.getText());
+        nodo.add(nombre_can);
+        tipo_categoria.add(nodo);
+        raiz.add(tipo_categoria);
+        m.reload();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        String nombre, direccion;
+        int nivel_seguridad;
+        try {
+            nombre = tf_nombre_casa.getText();
+            direccion = ta_direccion_casa.getText();
+            nivel_seguridad = (Integer) sp_nivel_casa.getValue();
+            lista_casas.add(new Casa(nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
+            JOptionPane.showMessageDialog(this, "La casa ha sido creada exitosamente");
+
+            if (Double.parseDouble(tf_distancia.getText()) <= 50) {
                 DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
                 modelo.addElement(new Lugar(tf_nombre_cancha.getText(), ta_direccion_cancha.getText(), (Integer) sp_nivel_cancha.getValue(),
                         new Carretera(), new Carretera()));
@@ -748,22 +825,57 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se guardaron los datos");
         }
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jButton3MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTreeModel m = (DefaultTreeModel) jt_categorias.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-        DefaultMutableTreeNode tipo_categoria;
-        tipo_categoria = new DefaultMutableTreeNode("Canchas");
-        DefaultMutableTreeNode nodo;
-        nodo = new DefaultMutableTreeNode(cb_categoria_cancha.getSelectedItem().toString());
-        DefaultMutableTreeNode nombre_can;
-        nombre_can = new DefaultMutableTreeNode(tf_nombre_cancha.getText());
-        nodo.add(nombre_can);
-        tipo_categoria.add(nodo);
-        raiz.add(tipo_categoria);
-        m.reload();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        jtb_listar.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},
+                new String[]{"Nombre", "Direccion", "Nivel de seguridad", "Categoria"}));
+        DefaultTableModel modelo = (DefaultTableModel) jtb_listar.getModel();
+
+        for (int i = 0; i < lista_canchas.size(); i++) {
+            Object[] row = {lista_canchas.get(i).getNombre(), lista_canchas.get(i).getDireccion(),
+                lista_canchas.get(i).getNivel_seguridad(), lista_canchas.get(i).getCategoria(),};
+            modelo.addRow(row);
+        }
+        jtb_listar.setModel(modelo);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        int numero;
+        double distancia;
+        Lugar inicio, finale;
+        try {
+            numero = Integer.parseInt(tf_numero.getText());
+            distancia = Double.parseDouble(tf_distancia.getText());
+            inicio = (Lugar)cb_inicio.getSelectedItem();
+            finale = (Lugar)cb_inicio.getSelectedItem();
+            lista_carreteras.add(new Carretera(numero, distancia, inicio, finale));
+            JOptionPane.showMessageDialog(this, "La carretera ha sido creada exitosamente");
+            tf_numero.setText("");
+            tf_distancia.setText("");
+            cb_inicio.setSelectedIndex(0);
+            cb_final.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se han guardado los datos ");
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void tb_controlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tb_controlStateChanged
+        if (tb_control.getSelectedIndex() == 1){
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (Restaurantes temp : lista_restaurantes) {
+                modelo.addElement(temp);
+            }
+            for (Canchas temp : lista_canchas) {
+                modelo.addElement(temp);
+            }
+            for (Casa temp : lista_casas) {
+                modelo.addElement(temp);
+            }
+            cb_inicio.setModel(modelo);
+            cb_final.setModel(modelo);
+        }
+    }//GEN-LAST:event_tb_controlStateChanged
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -855,11 +967,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JList<String> jl_listar;
-    private javax.swing.JTree jt_categorias;
+    private javax.swing.JTree jt_categorias_restaurante;
     private javax.swing.JTable jtb_listar;
     private javax.swing.JSpinner sp_nivel_cancha;
     private javax.swing.JSpinner sp_nivel_casa;
@@ -867,6 +978,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextArea ta_direccion_cancha;
     private javax.swing.JTextArea ta_direccion_casa;
     private javax.swing.JTextArea ta_direccion_restaurante;
+    private javax.swing.JTabbedPane tb_control;
     private javax.swing.JTextField tf_calificacion;
     private javax.swing.JTextField tf_distancia;
     private javax.swing.JTextField tf_nombre_cancha;
@@ -874,5 +986,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nombre_restaurante;
     private javax.swing.JTextField tf_numero;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<Lugar> lista_lugares = new ArrayList();
+    private ArrayList<Restaurantes> lista_restaurantes = new ArrayList();
+    private ArrayList<Canchas> lista_canchas = new ArrayList();
+    private ArrayList<Casa> lista_casas = new ArrayList();
+    private ArrayList<Carretera> lista_carreteras = new ArrayList();
 }
