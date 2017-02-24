@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg_lugar = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -87,7 +88,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtb_listar = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jt_categorias = new javax.swing.JTree();
@@ -233,6 +235,16 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(ta_direccion_cancha);
 
         jButton2.setText("Agregar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         cb_categoria_cancha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Football", "Basketball", "Tennis", "Volleyball" }));
 
@@ -543,7 +555,16 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(jtb_listar);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurantes", "Canchas", "Casas" }));
+        bg_lugar.add(jRadioButton1);
+        jRadioButton1.setText("Restaurantes");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        bg_lugar.add(jRadioButton2);
+        jRadioButton2.setText("Canchas");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -552,16 +573,21 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton2))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115))
         );
@@ -652,20 +678,22 @@ public class Principal extends javax.swing.JFrame {
         //Agregar a Árbol
         DefaultTreeModel m = (DefaultTreeModel) jt_categorias.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode tipo_categoria;
+        tipo_categoria = new DefaultMutableTreeNode("Restaurantes");
         DefaultMutableTreeNode nodo;
         nodo = new DefaultMutableTreeNode(cb_categoria_restaurante.getSelectedItem().toString());
         DefaultMutableTreeNode nombre_res;
         nombre_res = new DefaultMutableTreeNode(tf_nombre_restaurante.getText());
         nodo.add(nombre_res);
-        raiz.add(nodo);
+        tipo_categoria.add(nodo);
+        raiz.add(tipo_categoria);
         m.reload();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        String nombre, direccion, categoria;
+        int nivel_seguridad, calificacion;
         try {
-            String nombre, direccion, categoria;
-            int nivel_seguridad, calificacion;
-            Carretera entrada, salida;
             nombre = tf_nombre_restaurante.getText();
             direccion = ta_direccion_restaurante.getText();
             nivel_seguridad = (Integer) sp_nivel_restaurante.getValue();
@@ -689,6 +717,53 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se guardaron los datos");
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        String nombre, direccion, categoria, estado;
+        int nivel_seguridad;
+        try {
+            nombre = tf_nombre_cancha.getText();
+            direccion = ta_direccion_cancha.getText();
+            nivel_seguridad = (Integer) sp_nivel_cancha.getValue();
+            categoria = cb_categoria_cancha.getSelectedItem().toString();
+            estado = cb_estado.getSelectedItem().toString();
+            lista_lugares.add(new Canchas(categoria, estado, nombre, direccion, nivel_seguridad, new Carretera(), new Carretera()));
+            JOptionPane.showMessageDialog(this, "La cancha ha sido creada exitosamente");
+            
+            if (Double.parseDouble(tf_distancia.getText()) <= 50){
+                DefaultListModel modelo = (DefaultListModel) jl_listar.getModel();
+                modelo.addElement(new Lugar(tf_nombre_cancha.getText(), ta_direccion_cancha.getText(), (Integer) sp_nivel_cancha.getValue(),
+                        new Carretera(), new Carretera()));
+            }
+
+            tf_nombre_cancha.setText("");
+            ta_direccion_cancha.setText("");
+            sp_nivel_cancha.setValue(0);
+            cb_categoria_cancha.setSelectedIndex(0);
+            cb_estado.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se guardaron los datos");
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTreeModel m = (DefaultTreeModel) jt_categorias.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode tipo_categoria;
+        tipo_categoria = new DefaultMutableTreeNode("Canchas");
+        DefaultMutableTreeNode nodo;
+        nodo = new DefaultMutableTreeNode(cb_categoria_cancha.getSelectedItem().toString());
+        DefaultMutableTreeNode nombre_can;
+        nombre_can = new DefaultMutableTreeNode(tf_nombre_cancha.getText());
+        nodo.add(nombre_can);
+        tipo_categoria.add(nodo);
+        raiz.add(tipo_categoria);
+        m.reload();
+    }//GEN-LAST:event_jButton2ActionPerformed
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -720,6 +795,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bg_lugar;
     private javax.swing.JComboBox<String> cb_categoria_cancha;
     private javax.swing.JComboBox<String> cb_categoria_restaurante;
     private javax.swing.JComboBox<String> cb_entrada_cancha;
@@ -735,7 +811,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -771,6 +846,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
