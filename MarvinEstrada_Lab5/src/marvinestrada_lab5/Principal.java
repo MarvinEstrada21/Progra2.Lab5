@@ -766,6 +766,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         String nombre, direccion, categoria;
         int nivel_seguridad, calificacion;
+        tf_distancia.setText("0");
         try {
             nombre = tf_nombre_restaurante.getText();
             direccion = ta_direccion_restaurante.getText();
@@ -807,6 +808,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         String nombre, direccion, categoria, estado;
         int nivel_seguridad;
+        tf_distancia.setText("0");
         try {
             nombre = tf_nombre_cancha.getText();
             direccion = ta_direccion_cancha.getText();
@@ -856,6 +858,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         String nombre, direccion;
         int nivel_seguridad;
+        tf_distancia.setText("0");
         try {
             nombre = tf_nombre_casa.getText();
             direccion = ta_direccion_casa.getText();
